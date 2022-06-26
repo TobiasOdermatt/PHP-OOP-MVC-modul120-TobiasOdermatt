@@ -4806,10 +4806,10 @@ textarea.form-control-lg {
 .page-link {
   position: relative;
   display: block;
-  color: #0d6efd;
+  color: #7f59b0;
   text-decoration: none;
   background-color: #fff;
-  border: 1px solid #dee2e6;
+  border: 1px solid #7f59b0;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4837,8 +4837,8 @@ textarea.form-control-lg {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #4b3b35;
+  border-color: #4b3b35;
 }
 .page-item.disabled .page-link {
   color: #6c757d;
@@ -7484,8 +7484,10 @@ textarea.form-control-lg {
 }
 
 .py-3 {
+  bottom: 0;
+  width: 100%;
   padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
+  padding-bottom: 1.2rem !important;
 }
 
 .py-4 {
@@ -7494,8 +7496,8 @@ textarea.form-control-lg {
 }
 
 .py-5 {
-  padding-top: 3rem !important;
-  padding-bottom: 3rem !important;
+  padding-top: 2.8rem !important;
+  padding-bottom: 1.8rem !important;
 }
 
 .pt-0 {
@@ -7844,6 +7846,7 @@ textarea.form-control-lg {
 }
 
 .bg-dark {
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     --bs-bg-opacity: 1;
     background-color: #4b3b35;
 }

@@ -50,3 +50,4 @@ $NavBarwithoutSession = [
                 </div>
             </div>
         </nav>
+        <div class="container px-4 px-lg-5">

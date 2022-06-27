@@ -1,7 +1,5 @@
 <!-- Page Content-->
-    <div class="container px-4 px-lg-5">
         <br>
-    <?php include 'helpers/errormanagement.inc.php'; ?>
             <!-- Heading Row-->
             <div class="row gx-4 gx-lg-5 align-items-center my-5">
                 <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="assets/startup_picture.jpg" alt="..." /></div>

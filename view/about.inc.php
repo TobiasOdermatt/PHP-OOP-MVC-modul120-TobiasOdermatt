@@ -1,6 +1,5 @@
-        <!-- Page Content-->
-        <div class="container px-4 px-lg-5">
-            <!-- Heading Row-->
+        <!-- Seiteninhalt-->
+   
             <div class="row gx-4 gx-lg-5 align-items-center my-5">
                     <h1 class="font-weight-light">Das Bücherantiquariat in Basel</h1><br>
                     <h3>Kurzinformation:</h2>

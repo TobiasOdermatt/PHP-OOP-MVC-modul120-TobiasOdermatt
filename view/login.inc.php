@@ -1,10 +1,8 @@
 <?php //Login- und Fehlermanagement Komponente wird integriert
-include 'helpers/errormanagement.inc.php';
 require_once('helpers/loginmanagement.inc.php') ;
  ?>
 
    <!-- Seiteninhalt-->
-    <div class="container px-4 px-lg-5">
     <br>
     <h2>Benutzer anmelden</h2>
     <p>Bitte geben Sie zur Identifikation die E-Mail sowie Passwort an.</p>
@@ -29,7 +27,5 @@ DisplayMessage($message);?>
     <button type="submit" class="btn btn-primary">Einloggen</button>
 </form>
 </div>
-
-
-
 </div>
+<?php for($i = 0; $i < 11;$i++){echo "<br>";}?>

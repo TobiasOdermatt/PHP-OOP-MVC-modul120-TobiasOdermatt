@@ -10,18 +10,18 @@ function generateBooksModal($db,$book,$searchmanagement){?>
         </div>
         <div class="modal-body">
         <h2>Buchtitel: <?php echo ($book->kurztitle)?></h2> 
-        <h4>Beschreibung:</h3>
+        <h3 class="modal-title">Beschreibung:</h3>
         <p><?php echo ($book->title)?></p>
-        <h4>Autor: </h4>
+        <h4 class="modal-title">Autor: </h4>
         <?php if(($book->autor) == " "){ ?><p class="text-danger"><?php
         echo "Unbekannt";?></p><?php }
         else{?><p class="text-dark"><?php echo ($book->autor); ?></p><?php } ?>
-       <h4>Zustand: </h4><?php 
+       <h4 class="modal-title">Zustand: </h4><?php 
     if($book->zustand == "G"){?> <p class="text-success"><?php echo "Gut";?></p><?php }
     if($book->zustand == "M"){?> <p class="text-dark"><?php echo "Mittel";?></p><?php }
     if($book->zustand == "S"){?> <p class="text-danger"><?php echo "Schlecht";?></p><?php }?>
 
-    <h4>Kategorie: </h3>
+    <h4 class="modal-title">Kategorie: </h4>
         <?php if (empty($searchmanagement->loadCategory($db,$book->kategorie)))
                 {?> <p class="text-danger"><?php echo "Keine Kategorie zugewiesen";?></p><?php }
               

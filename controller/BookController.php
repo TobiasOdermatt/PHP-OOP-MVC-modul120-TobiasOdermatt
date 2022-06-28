@@ -20,6 +20,12 @@
         return $Books;
     }
 
+    public function get_data_with_keywordAdvanced($start,$limit,$db,$searchkeyword,$sortingmethod,$sortas,$topic,$zustand){
+        $Books = new Book();
+        $Books = $Books->get_data_with_keywordAdvanced($start,$limit,$db,$searchkeyword,$sortingmethod,$sortas,$topic,$zustand);
+        return $Books;
+    }
+
     
     public function loadBookwithCategoryandKeyword($start,$limit,$db,$categoryID,$searchkeyword){
         $Books = new Book();

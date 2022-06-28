@@ -24,6 +24,11 @@ class Book{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS, "Book");
     }
+    public function get_data_with_keywordAdvanced($start,$limit,$db,$searchkeyword,$sortingmethod,$sortas,$topic,$zustand){
+        $stmt = $db->prepare("SELECT * FROM buecher WHERE $topic like '%$searchkeyword%' and zustand like '%$zustand%' ORDER BY $sortas $sortingmethod LIMIT $start, $limit");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_CLASS, "Book");
+    }
     public function get_data_with_keyword($start,$limit,$db,$searchkeyword){
         $stmt = $db->prepare("SELECT * FROM buecher WHERE kurztitle like '%$searchkeyword%' LIMIT $start, $limit");
         $stmt->execute();

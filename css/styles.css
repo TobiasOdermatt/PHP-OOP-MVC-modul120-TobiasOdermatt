@@ -4493,6 +4493,7 @@ textarea.form-control-lg {
 .navbar-dark .navbar-nav .show > .nav-link,
 .navbar-dark .navbar-nav .nav-link.active {
   color: #fff;
+  font-weight: bolder;
 }
 .navbar-dark .navbar-toggler {
   color: rgba(255, 255, 255, 0.55);

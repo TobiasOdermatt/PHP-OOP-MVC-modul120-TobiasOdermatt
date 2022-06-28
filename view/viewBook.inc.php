@@ -11,7 +11,8 @@
         include 'model/category.php';
 
         $db = Database::getInstance();
-        $paginationsystem = new paginationmanagement("buecher",$db,20);
+        $countOfResults = 20; //Anzahl Bücher pro Seite
+        $paginationsystem = new paginationmanagement("buecher",$db,$countOfResults);
         $start = $paginationsystem->get_start();
         $limit = $paginationsystem->get_limit();
         $books  = new BookController($db);
@@ -21,21 +22,26 @@
         if($searchresult != null){$books = $searchresult;}
         $currentCategoryID = loadCategoryID();
         $currentsearch = loadSearchKeyword();
+
+        
     ?>
         <br>
-        <form method="get" action="">
+        <form method="get" action="#">
         <div class="input-group">
         <?php generateSearchBar() ?>
-         </form>
-        <?php  $searchmanagement->generateDropdownbar($db)?>
-
+      
+        <?php  $searchmanagement->generateDropdownbar($db);
+                $searchmanagement->generateAdvancedSearchButton();
+                $searchmanagement->advancedSearchModal(); ?>
         <div class="row gx-4 gx-lg-4">
+
+        
         <?php foreach ($books as $book): ?>
             <!-- Vorschaukarte -->
             <div class="col-md-3 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo ($book->kurztitle); ?></h2>
+                            <h5 class="card-title"><?php echo ($book->kurztitle); ?></h5>
                             <p class="card-text"><?php echo ($book->title)?></p>
                             <!-- Details Button -->
                         </div>
@@ -46,9 +52,10 @@
             <?php  generateBooksModal($db, $book,$searchmanagement); ?>
          <?php endforeach; ?>
          </div>  
-        <?php $currentCategoryID = $currentCategoryID == 0 ? '' : '&category='.$currentCategoryID;
-                $currentsearch = $currentsearch == null ? '' : '&search='.$currentsearch;
-                $searchparam = $currentCategoryID.$currentsearch?>
-            
+         
+        <?php //Hier wird der searchString zusammengesetzt
+        $currentCategoryID = $currentCategoryID == 0 ? '' : '&category='.$currentCategoryID;
+        $currentsearch = $currentsearch == null ? '' : '&search='.$currentsearch;
+        $searchparam = $currentCategoryID.$currentsearch?>
+</form>
          <?php $paginationsystem->generatePagination("viewBook",$searchparam) ?>
-</div>

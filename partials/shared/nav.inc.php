@@ -16,7 +16,7 @@ $NavBarwithoutSession = [
         foreach ($NavBarwithSession as $key => $value) {
             if($view == $key) {
             //Ist der Benutzer auf der aktuelle Seite, so wird der Text in der Nav Fett angezeig
-                ?> <strong><li class="nav-item"><a class="nav-link active" href="./index.php?view=<?php echo $key?>"><?php echo $value?></a></li></strong><?php
+                ?><li class="nav-item"><a class="nav-link active" href="./index.php?view=<?php echo $key?>"><?php echo $value?></a></li><?php
             }else{
             ?> <li class="nav-item"><a class="nav-link" href="./index.php?view=<?php echo $key?>"><?php echo $value?></a></li><?php
           }}
@@ -25,7 +25,7 @@ $NavBarwithoutSession = [
         foreach ($NavBarwithoutSession as $key => $value) {
             //Ist der Benutzer auf der aktuelle Seite, so wird der Text in der Nav Fett angezeigt
             if($view == $key) {
-                ?> <strong><li class="nav-item"><a class="nav-link active" href="./index.php?view=<?php echo $key?>"><?php echo $value?></a></li></strong> <?php
+                ?><li class="nav-item"><a class="nav-link active" href="./index.php?view=<?php echo $key?>"><?php echo $value?></a></li> <?php
             }else{
             ?> <li class="nav-item"><a class="nav-link" href="./index.php?view=<?php echo $key?>"><?php echo $value?></a></li><?php
           }}
@@ -36,7 +36,6 @@ $NavBarwithoutSession = [
      <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-5">
-            <a class="navbar-brand" href="#">
                  <!-- Home ist auf allen Seiten gleich -->
                 <a class="navbar-brand" href="<?php $root?>index.php">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>

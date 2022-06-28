@@ -9,6 +9,5 @@
                     <a class="btn btn-primary" href="?view=about">Mehr informationen</a>
                 </div>
             </div>
-            </div>
             <br>
         <br>

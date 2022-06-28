@@ -29,21 +29,21 @@
 <thead class="thead-light">
     <tr>
       <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $sortmethod?>&sort=kid" class="link-secondary text-decoration-none">
-      # Kundennummer</th>
+      # Kundennummer</a></th>
       <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $sortmethod?>&sort=vorname" class="link-secondary text-decoration-none">
-      Vorname</th>
+      Vorname</a></th>
       <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $sortmethod?>&sort=name" class="link-secondary text-decoration-none">
-      Nachname</th>
+      Nachname</a></th>
       <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $sortmethod?>&sort=geschlecht" class="link-secondary text-decoration-none">
-      Geschlecht</th>
+      Geschlecht</a></th>
       <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $sortmethod?>&sort=kunde_seit" class="link-secondary text-decoration-none">
-      Kunde seit:</th>
+      Kunde seit:</a></th>
       <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $sortmethod?>&sort=email" class="link-secondary text-decoration-none">
-      E-Mail:</th>
+      E-Mail:</a></th>
       <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $sortmethod?>&sort=geburtstag" class="link-secondary text-decoration-none">
-      Geburstag:</th>
+      Geburstag:</a></th>
       <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $sortmethod?>&sort=kontaktpermail" class="link-secondary text-decoration-none">
-      Kontakt erwünscht:</th>
+      Kontakt erwünscht</a></th>
     </tr>
   </thead>
   <tbody>
@@ -62,6 +62,5 @@
   </tbody>
 </table>
 
-     </div>
-</div>
+  
 <?php $paginationsystem->generatePagination("viewCustomer",'') ?>

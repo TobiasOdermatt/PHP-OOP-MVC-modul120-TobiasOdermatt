@@ -20,6 +20,7 @@ public function get_data($start,$limit,$db,$sortmethod,$sort){
     $stmt = $db->prepare("SELECT * FROM kunden LIMIT $start, $limit");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_CLASS, "customer");
-}}
+}
 
+}
 ?>

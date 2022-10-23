@@ -37,11 +37,11 @@ CREATE TABLE `benutzer` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `benutzer`
+-- admin pw = password
 --
 
 INSERT INTO `benutzer` (`ID`, `benutzername`, `name`, `vorname`, `passwort`, `email`, `admin`) VALUES
-(1, 'admin', 'Beatrice', 'Duc', '$2y$10$drE0gaAWhK8fP6oAzvJ9/eZrkMQO0C/8nMLcJMOwuFti.fLYAngWC', 'beatrice.duc@edubs.ch', 1),
+(1, 'admin', 'Test', 'Test', '$2a$12$9IGyyOsT/aLHBocH92IlUu8GmhBrcL79u3MhZrCMF3wQtOYY32lqW', 'admin@admin.com', 1),
 (2, 'user1', 'Paul', 'Mueller', '$2y$10$DGtUv1YREv3ZmSxjgrsSWuyr7gkTWbcdudSnDheRd.Clhbls32G8K', 'paul.mueller@test.test', NULL),
 (3, 'user2', 'Stefan', 'Linder', '$2y$10$LPx9aYcnZtWP9tzbLy8Rjulgeezu1dw75yG1UYjSYEaL1.FXfshwu', 'stefan.linder@test.test', NULL),
 (4, 'user3', 'Isabel', 'Karger', '$2y$10$eOyUIJ1N8ULVpcxn0dnDyOXG/lxGQzNFenqBIfXNS9igbIdgDpO5y', 'isabel.karger@test.test', NULL),

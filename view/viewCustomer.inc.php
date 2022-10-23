@@ -57,11 +57,12 @@ $paginationsystem->set_total_records($totalcounts);
 function createParam($sort, $sortmethod, $searchkeyword){
   $sortparam = '';
   if($sort != null){
-    $sortparam = "$sortmethod&sort=$sort";
+    $sortparam = "&sortmethod=$sortmethod&sort=$sort";
   }
   $currentsearch = $searchkeyword == null ? '' : '&search=' . $searchkeyword;
   return $sortparam . $currentsearch;
 }
+
 if($searchkeyword == null){
   $displaysearch = '';
 }

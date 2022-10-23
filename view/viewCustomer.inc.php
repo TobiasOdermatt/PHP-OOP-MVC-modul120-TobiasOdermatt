@@ -2,7 +2,7 @@
 <br>
 <h1>Kundenverwaltung</h1>
 
-<p>Auf dieser Seite kÃ¶nnen alle Kunden des BÃ¼cherantiquariat Basels einfach verwaltet werden.</p>
+<p>Auf dieser Seite können alle Kunden des Bücherantiquariat Basels einfach verwaltet werden.</p>
 <?php
 require_once('model/connection.php');
 require_once('controller/CustomerController.php');
@@ -10,7 +10,8 @@ require_once('helpers/paginationmanagement.php');
 include 'model/customer.php';
 
 $db = Database::getInstance();
-$paginationsystem = new paginationmanagement("kunden", $db, 30);
+$countOfResults = 30; //Anzahl Kunden pro Seite
+$paginationsystem = new paginationmanagement($countOfResults);
 $start = $paginationsystem->get_start();
 $limit = $paginationsystem->get_limit();
 $customers  = new CustomerController($db);
@@ -21,19 +22,51 @@ if(isset($_GET['sortmethod']))
  if(in_array($_GET['sortmethod'], $sortoption))
   {
 	$sortmethod = $_GET['sortmethod'];
-  $displaysortmethod = $sortoption[array_search($_GET['sortmethod'], $sortoption)+1];
+  if($sortmethod == "ASC")
+  {
+      $displaysortmethod = "DESC";
   }
+  else
+  {
+      $displaysortmethod = "ASC";
+  }
+  }
+}
+else
+{
+  $sortmethod = "ASC";
 }
 
 $sort = isset($_GET['sort']) ? $_GET['sort'] : null;
 $searchkeyword = isset($_GET['search']) ? $_GET['search'] : null;
+$totalcounts = 0;
 if($searchkeyword == null)
 {
-  $customers = $customers->load_customers($start, $limit, $db, $sortmethod, $sort);
+  $result = $customers->load_customers($start, $limit, $db, $sortmethod, $sort);
+  $totalcounts = $result[0];
+  $customers = $result[1];
 }
 else
 {
-  $customers = $customers->load_customersWithKeyword($start, $limit, $db, $searchkeyword, $sortmethod, $sort);
+  $result = $customers->load_customersWithKeyword($start, $limit, $db, $searchkeyword, $sortmethod, $sort);
+  $totalcounts = $result[0];
+  $customers = $result[1];
+}
+$paginationsystem->set_total_records($totalcounts);
+
+function createParam($sort, $sortmethod, $searchkeyword){
+  $sortparam = '';
+  if($sort != null){
+    $sortparam = "$sortmethod&sort=$sort";
+  }
+  $currentsearch = $searchkeyword == null ? '' : '&search=' . $searchkeyword;
+  return $sortparam . $currentsearch;
+}
+if($searchkeyword == null){
+  $displaysearch = '';
+}
+else{
+  $displaysearch = '&search=' . $searchkeyword;
 }
 ?>
 
@@ -42,25 +75,26 @@ else
   <input type="search" class="form-control rounded" placeholder="Datenbank nach Kunden durchsuchen.." id="searchInput"/>
   <button type="button" onclick="addSearchParamToGET()" class="btn btn-primary">Suchen</button>
 </div>
+<p class="text-secondary py-2" style="font-style: italic"><?php echo $totalcounts?> Kunden gefunden.</p>
 <table class="table">
   <thead class="thead-light">
     <tr>
-      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=kid" class="link-secondary text-decoration-none">
+      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=kid<?php echo $displaysearch?>" class="link-secondary text-decoration-none">
           #Kundennummer</a></th>
-      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=vorname" class="link-secondary text-decoration-none">
+      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=vorname<?php echo $displaysearch?>" class="link-secondary text-decoration-none">
           Vorname</a></th>
-      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=name" class="link-secondary text-decoration-none">
+      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=name<?php echo $displaysearch?>" class="link-secondary text-decoration-none">
           Nachname</a></th>
-      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=geschlecht" class="link-secondary text-decoration-none">
+      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=geschlecht<?php echo $displaysearch?>" class="link-secondary text-decoration-none">
           Geschlecht</a></th>
-      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=kunde_seit" class="link-secondary text-decoration-none">
+      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=kunde_seit<?php echo $displaysearch?>" class="link-secondary text-decoration-none">
           Kunde seit:</a></th>
-      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=email" class="link-secondary text-decoration-none">
+      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=email<?php echo $displaysearch?>" class="link-secondary text-decoration-none">
           E-Mail:</a></th>
-      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=geburtstag" class="link-secondary text-decoration-none">
+      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=geburtstag<?php echo $displaysearch?>" class="link-secondary text-decoration-none">
           Geburstag:</a></th>
-      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=kontaktpermail" class="link-secondary text-decoration-none">
-          Kontakt erwÃ¼nscht</a></th>
+      <th scope="col"><a href="./index.php?view=viewCustomer&sortmethod=<?php echo $displaysortmethod ?>&sort=kontaktpermail<?php echo $displaysearch?>" class="link-secondary text-decoration-none">
+          Kontakt erwünscht</a></th>
     </tr>
   </thead>
   <tbody>
@@ -87,4 +121,8 @@ function addSearchParamToGET(){
 }
 </script>
 
-<?php $paginationsystem->generatePagination("viewCustomer", '') ?>
+<?php 
+  $searchparam = createParam($sort, $sortmethod, $searchkeyword);
+  ?>
+
+<?php $paginationsystem->generatePagination("viewCustomer", $searchparam) ?>

@@ -5,22 +5,16 @@
 
 class paginationmanagement
 {
-    private $table, $db, $total_records, $limit;
+    private $total_records, $limit;
 
 
-    public function __construct($table, $db, $limit)
+    public function __construct($limit)
     {
-        $this->table = $table;
         $this->limit = $limit;
-        $this->db = $db;
-        $this->set_total_records();
     }
 
-    public function set_total_records()
-    {
-        $stmt   = $this->db->prepare("SELECT * FROM $this->table");
-        $stmt->execute();
-        $this->total_records = $stmt->rowCount();
+    public function set_total_records($recordscount){
+        $this->total_records = $recordscount;
     }
 
     public function get_current_page()
@@ -66,6 +60,10 @@ class paginationmanagement
 
 
 ?>
+        <?php
+        if($pages != 0)
+        {
+            ?>
         <!--Pagination -->
         <br><br>
         <nav aria-label="...">
@@ -109,5 +107,10 @@ class paginationmanagement
             </ul>
         </nav><?php
             }
+            else { ?>
+            <br> <br> <br> <br> <br> <br> <br> <br>
+            <br> <br> <br> <br> <br> <br> <br> <br>
+            <?php }
         }
+    }
 ?>

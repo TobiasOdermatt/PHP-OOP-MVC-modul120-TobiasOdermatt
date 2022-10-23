@@ -166,7 +166,7 @@ class searchmanagement
                     "1" => "autor",
                     "2" => "kategorie",
                     "3" => "nummer",
-                    "4" => "katalog",
+                    "4" => "katalog"
                 ];
                 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     if (isset($_GET['topic']) && is_numeric($_GET['topic'])) {
@@ -240,24 +240,28 @@ class searchmanagement
 
 
                 if ($categoryid != null && $searchkeyword != '') {
-                    $books = $books->loadBookwithCategoryandKeyword($start, $limit, $db, $categoryid, $searchkeyword);
-                    if ($books == null) {
+                    $result = $books->loadBookwithCategoryandKeyword($start, $limit, $db, $categoryid, $searchkeyword);
+
+                    if ($result[1] == null) {
                         DisplayError("Keine Ergebnise");
+                        return array(0, "No Result");
                     }
                 } elseif ($categoryid == null && $searchkeyword != '') {
-                    $books = $books->get_data_with_keywordAdvanced($start, $limit, $db, $searchkeyword, $sortingmethod, $sortas, $topic, $zustand);
-                    if ($books == null) {
+                    $result = $books->get_data_with_keywordAdvanced($start, $limit, $db, $searchkeyword, $sortingmethod, $sortas, $topic, $zustand);
+                    if ($result[1] == null) {
                         DisplayError("Keine Ergebnise");
+                        return array(0, "No Result");
                     }
                 } elseif ($categoryid != null && $searchkeyword == '') {
-                    $books = $books->loadBookwithCategory($start, $limit, $db, $categoryid);
-                    if ($books == null) {
+                    $result = $books->loadBookwithCategory($start, $limit, $db, $categoryid);
+                    if ($result[1] == null) {
                         DisplayError("Keine Ergebnise");
+                        return array(0, "No Result");
                     }
                 } else {
-                    return null;
+                    return array(0, null);
                 }
-                return $books;
+                return $result;
             }
 
             function generateSearchBar()

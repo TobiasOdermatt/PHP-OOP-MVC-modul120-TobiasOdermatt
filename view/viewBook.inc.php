@@ -12,15 +12,24 @@
 
         $db = Database::getInstance();
         $countOfResults = 20; //Anzahl Bücher pro Seite
-        $paginationsystem = new paginationmanagement("buecher", $db, $countOfResults);
+        $paginationsystem = new paginationmanagement($countOfResults);
         $start = $paginationsystem->get_start();
         $limit = $paginationsystem->get_limit();
         $books  = new BookController($db);
-        $books = $books->loadBooks($start, $limit, $db);
+        $totalcounts = 0;
+
+        $result = $books->loadBooks($start, $limit, $db);
+        $totalcounts = $result[0];
+        $books = $result[1];
         $searchmanagement = new searchmanagement();
         $searchresult = loadSearchvalues($db, $start, $limit);
-        if ($searchresult != null) {
-            $books = $searchresult;
+        if ($searchresult[1] != null) {
+            $books = $searchresult[1];
+            $totalcounts = $searchresult[0];
+            if($searchresult[1] == "No Result")
+            {
+                $books = array();
+            }
         }
         $currentCategoryID = loadCategoryID();
         $currentsearch = loadSearchKeyword();
@@ -35,6 +44,9 @@
                 <?php $searchmanagement->generateDropdownbar($db);
                 $searchmanagement->generateAdvancedSearchButton();
                 $searchmanagement->advancedSearchModal(); ?>
+
+                <p class="text-secondary py-2" style="font-style: italic"><?php echo $totalcounts?> Bücher gefunden.</p>
+
                 <div class="row gx-4 gx-lg-4">
 
 
@@ -60,4 +72,6 @@
                 $currentsearch = $currentsearch == null ? '' : '&search=' . $currentsearch;
                 $searchparam = $currentCategoryID . $currentsearch ?>
         </form>
-        <?php $paginationsystem->generatePagination("viewBook", $searchparam) ?>
+        <?php 
+        $paginationsystem->set_total_records($totalcounts);
+        $paginationsystem->generatePagination("viewBook", $searchparam) ?>

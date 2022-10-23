@@ -20,11 +20,7 @@ function validatelogin($mail, $password)
 	}
 	// password
 	if (!empty(trim($password))) {
-		$password = trim($password);
-		// passwort gültig?
-		if (!preg_match("/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/", $password)) {
-			$error .= "Das Passwort entspricht nicht dem geforderten Format.<br />";
-		}
+		$password = trim($password);	
 	} else {
 		$error .= "Geben Sie bitte das Passwort an.<br />";
 	}

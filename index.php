@@ -8,7 +8,7 @@ $view = "Home";
 //Falls der Seite, View Parameter bekommt
 if ($_SERVER["REQUEST_METHOD"] == "GET" || $_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_GET["view"])) {
-        $view  = $_GET["view"];
+        $view = (strlen($_GET["view"]) > 10 || strpos($_GET["view"], '.') !== false) ? "Home" : $_GET["view"];
     }
 }
 //Navigationsleiste
